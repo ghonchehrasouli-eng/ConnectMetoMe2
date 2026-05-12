@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Connect Me To Me — Inner Journey UX</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1E3140;--navy-d:#152636;--navy-l:#243A4E;--rose:#845460;--rose-l:#C4929E;--teal:#5BA3A8;--teal-d:#3D8A90;--peach:#EAD3C8;--sage:#BDC7C9;--gold:#D4A820;--check:#9DC08B;--b:rgba(189,199,201,.13);--bw:rgba(234,211,200,.2);--gR:rgba(132,84,96,.22);--gT:rgba(91,163,168,.16)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}html,body{height:100%;background:var(--navy-d);font-family:Jost,sans-serif;color:var(--sage);overflow:hidden;-webkit-font-smoothing:antialiased}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 5% 8%,var(--gR),transparent 58%),radial-gradient(ellipse 50% 38% at 95% 92%,var(--gT),transparent 58%)}button,textarea,input{font-family:Jost,sans-serif}.S{position:absolute;inset:0;display:none;flex-direction:column;z-index:1;overflow:hidden}.S.on{display:flex;animation:sIn .32s cubic-bezier(.22,1,.36,1)}@keyframes sIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}.roll{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:98px;-webkit-overflow-scrolling:touch}.roll::-webkit-scrollbar{width:2px}.roll::-webkit-scrollbar-thumb{background:var(--bw);border-radius:2px}.bar{display:flex;align-items:center;gap:10px;padding:14px 16px 11px;background:rgba(21,38,54,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--b);z-index:5}.bar-title{flex:1;text-align:center;font-family:'Playfair Display',serif;color:var(--rose-l);font-size:18px}.ib{width:34px;height:34px;border-radius:50%;border:1px solid var(--b);background:rgba(189,199,201,.08);color:var(--sage);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}.sp{width:34px}.logo-row{display:flex;align-items:center;padding:17px 16px 8px}.logo-mark{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--teal));display:flex;align-items:center;justify-content:center;margin-right:10px;box-shadow:0 4px 14px var(--gR)}.logo-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--peach)}.logo-tag{font-size:10px;color:rgba(189,199,201,.45)}.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:#1A2E40;border-top:2px solid rgba(132,84,96,.38);padding:8px 0 7px}.nav-row{display:flex;justify-content:space-around;max-width:540px;margin:0 auto;padding:0 6px}.ni{display:flex;flex-direction:column;align-items:center;gap:4px;color:#BDC7C9;font-size:11px;font-weight:700;cursor:pointer;padding:6px 13px;border-radius:14px}.ni.on{background:rgba(132,84,96,.28);color:#EAD3C8}.ni svg{stroke:currentColor;fill:none}.sec{padding:14px}.slbl{font-size:9px;letter-spacing:2.6px;text-transform:uppercase;font-weight:700;margin-bottom:9px;color:rgba(196,146,158,.75)}.title-xl{font-family:'Playfair Display',serif;font-size:27px;line-height:1.25;color:var(--peach);font-weight:500}.sub{font-size:14px;line-height:1.65;color:rgba(189,199,201,.75)}.band,.card{border-radius:16px;padding:16px;margin-bottom:11px;border:1px solid var(--b);background:#1C3248}.b-rose{background:#2A1020;border-color:rgba(132,84,96,.3)}.b-teal{background:#0A2430;border-color:rgba(91,163,168,.28)}.b-navy{background:#182C3E;border-color:var(--bw)}.b-gold{background:#181000;border-color:rgba(212,168,32,.28)}.band p,.card p{font-size:15px;line-height:1.75;color:var(--peach);font-weight:300}.btn{border:none;border-radius:16px;padding:14px 18px;background:linear-gradient(135deg,var(--rose),var(--rose-l));color:#fff;font-weight:700;cursor:pointer;box-shadow:0 5px 16px rgba(132,84,96,.3)}.btn.teal{background:linear-gradient(135deg,var(--teal),var(--teal-d))}.btn.ghost{background:rgba(189,199,201,.08);border:1px solid var(--b);box-shadow:none;color:var(--peach)}.btn.full{width:100%;display:block}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stage-card,.lesson-card{background:#c9c0c0;border:none;border-radius:17px;padding:15px 16px;margin-bottom:10px;color:#000;cursor:pointer;transition:.2s}.stage-card:hover,.lesson-card:hover{transform:translateX(3px);background:#bbb0b0}.stage-card h3,.lesson-card h3{font-size:18px;color:#000;margin-bottom:4px}.lesson-card p,.stage-card p{font-size:13px;color:#333;line-height:1.5}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;border:1px solid rgba(91,163,168,.28);background:rgba(91,163,168,.11);color:var(--teal);font-size:11px;font-weight:700;padding:5px 9px;margin:4px 4px 0 0}.done{background:rgba(157,192,139,.16);border-color:rgba(157,192,139,.4);color:var(--check)}.vp{margin:12px 0;background:rgba(10,22,34,.78);border:1px solid rgba(91,163,168,.22);border-radius:16px;padding:13px 14px}.vp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.vp-lbl{font-size:9px;letter-spacing:2.3px;text-transform:uppercase;color:var(--teal);font-weight:700}.vp-row{display:flex;align-items:center;gap:11px}.vbtn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--rose),var(--rose-l));display:flex;align-items:center;justify-content:center;cursor:pointer}.vbar{flex:1}.vtrack{height:3px;background:rgba(189,199,201,.1);border-radius:3px;overflow:hidden}.vfill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--teal));transition:width .3s}.vtimes{display:flex;justify-content:space-between;margin-top:5px;font-size:10px;color:rgba(189,199,201,.38)}.wv{display:flex;gap:2px;height:13px;align-items:center;opacity:0}.wv.go{opacity:1}.wv span{width:3px;background:var(--teal);border-radius:2px;animation:wvA .6s ease-in-out infinite alternate}.wv span:nth-child(1){height:4px}.wv span:nth-child(2){height:10px;animation-delay:.1s}.wv span:nth-child(3){height:6px;animation-delay:.2s}.wv span:nth-child(4){height:12px;animation-delay:.07s}.wv span:nth-child(5){height:4px;animation-delay:.16s}@keyframes wvA{from{transform:scaleY(.45)}to{transform:scaleY(1.2)}}.spd{padding:3px 8px;border-radius:9px;background:rgba(189,199,201,.07);border:1px solid var(--b);color:rgba(189,199,201,.55);font-size:11px;font-weight:700;cursor:pointer}.dash{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:rgba(10,22,34,.58);border:1px solid var(--b);border-radius:16px;padding:14px}.metric .num{font-size:26px;color:var(--peach);font-weight:700}.metric .lbl{font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:1.4px}.xp-bar{height:7px;background:var(--b);border-radius:5px;overflow:hidden;margin-top:7px}.xp-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--rose-l));width:0}.journey{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px}.node{min-width:130px;border:1px solid var(--b);background:rgba(189,199,201,.05);border-radius:16px;padding:13px}.node.active{border-color:rgba(91,163,168,.48);background:rgba(91,163,168,.11)}.node.done{border-color:rgba(157,192,139,.5);background:rgba(157,192,139,.1)}.node .emoji{font-size:26px}.node h4{color:var(--peach);font-size:13px;margin-top:6px}.node p{font-size:11px;color:rgba(189,199,201,.62);line-height:1.35}.checkin-row{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:9px 12px;border-radius:999px;background:rgba(189,199,201,.07);border:1px solid var(--b);color:var(--sage);font-size:13px;cursor:pointer}.chip.sel{background:rgba(91,163,168,.18);border-color:rgba(91,163,168,.5);color:var(--peach)}.slider{height:44px;border:1px solid var(--b);border-radius:22px;background:rgba(189,199,201,.05);position:relative;overflow:hidden;cursor:pointer}.slider-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--teal),var(--rose-l));width:50%;border-radius:22px}.slider-num{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--peach);font-size:22px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.4)}textarea{width:100%;min-height:88px;resize:vertical;border:1px solid var(--b);background:rgba(10,22,34,.62);border-radius:14px;padding:13px;color:var(--peach);font-size:14px;line-height:1.65;outline:none}textarea::placeholder{color:rgba(189,199,201,.28)}.history-item{border-bottom:1px solid rgba(189,199,201,.08);padding:10px 0}.history-item:last-child{border:none}.history-item h4{color:var(--peach);font-size:14px}.history-item p{color:rgba(189,199,201,.7);font-size:12px;line-height:1.5;margin-top:4px}.assess-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:30px 20px;text-align:center}.assess-q{font-family:'Playfair Display',serif;font-size:22px;color:var(--peach);line-height:1.45;margin:24px 0}.assess-opts{display:flex;flex-direction:column;gap:10px;width:100%;max-width:350px}.assess-opt{padding:15px 18px;border-radius:16px;background:rgba(189,199,201,.06);border:1.5px solid var(--b);color:var(--sage);font-size:15px;cursor:pointer;text-align:left}.assess-opt.picked{border-color:var(--teal);background:rgba(91,163,168,.12);color:var(--peach)}.assess-progress{display:flex;gap:6px}.assess-dot{width:10px;height:10px;border-radius:50%;background:var(--b)}.assess-dot.done{background:var(--teal)}.assess-dot.now{background:var(--rose-l);transform:scale(1.25)}.modal{position:fixed;inset:0;background:rgba(10,18,28,.88);backdrop-filter:blur(14px);z-index:300;display:none;align-items:flex-end}.modal.on{display:flex}.sheet{width:100%;max-height:86vh;overflow-y:auto;background:var(--navy-l);border:1px solid var(--b);border-bottom:none;border-radius:22px 22px 0 0;padding:20px 15px 100px}.mhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.mtitle{font-family:'Playfair Display',serif;color:var(--peach);font-size:22px}.close{width:30px;height:30px;border-radius:50%;border:1px solid var(--b);background:rgba(189,199,201,.08);color:var(--sage)}.expand{display:none;margin-top:10px}.expand.on{display:block}.tiny{font-size:11px;color:rgba(189,199,201,.45);line-height:1.5}.empty{font-size:13px;color:rgba(189,199,201,.58);line-height:1.6;padding:6px 0}ul.clean{list-style:none;margin-top:8px}ul.clean li{display:flex;gap:8px;padding:7px 0;border-bottom:1px solid rgba(189,199,201,.08);font-size:14px;color:var(--peach);line-height:1.6}ul.clean li:last-child{border:none}.cf{position:fixed;inset:0;pointer-events:none;z-index:999}.confetti{position:absolute;width:8px;height:8px;border-radius:2px;animation:fall 2.2s ease-out forwards}@keyframes fall{to{transform:translateY(105vh) rotate(540deg);opacity:0}}@media(max-width:380px){.grid2,.dash{grid-template-columns:1fr}.ni{padding:6px 9px}.title-xl{font-size:24px}}
+
+/* Step 5 functional UX upgrades */
+.practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.practice-card{border-radius:16px;padding:14px;background:rgba(189,199,201,.06);border:1px solid var(--b);cursor:pointer;min-height:104px}.practice-card h4{color:var(--peach);font-size:15px;margin-bottom:6px}.practice-card p{font-size:12px;line-height:1.45;color:rgba(189,199,201,.72)}.breath-orb{width:126px;height:126px;border-radius:50%;margin:18px auto;background:radial-gradient(circle,rgba(234,211,200,.24),rgba(91,163,168,.10));border:1px solid rgba(234,211,200,.25);display:flex;align-items:center;justify-content:center;color:var(--peach);font-weight:700;animation:breathPulse 7s ease-in-out infinite}@keyframes breathPulse{0%,100%{transform:scale(.86)}50%{transform:scale(1.1)}}.body-map{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.body-part{border:1px solid var(--b);background:rgba(189,199,201,.06);border-radius:14px;padding:11px;color:var(--sage);cursor:pointer;text-align:center}.body-part.sel{background:rgba(91,163,168,.18);border-color:rgba(91,163,168,.55);color:var(--peach)}.dialogue-step{display:none}.dialogue-step.on{display:block}.step-dots{display:flex;gap:6px;justify-content:center;margin:12px 0}.step-dot{width:8px;height:8px;border-radius:50%;background:var(--b)}.step-dot.on{background:var(--teal);transform:scale(1.25)}.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.analytic{border-radius:14px;border:1px solid var(--b);background:rgba(10,22,34,.48);padding:12px}.analytic b{display:block;color:var(--peach);font-size:20px}.analytic span{font-size:10px;color:rgba(189,199,201,.55);text-transform:uppercase;letter-spacing:1px}.trend-line{margin-top:10px}.trend-row{display:flex;align-items:center;gap:8px;margin:7px 0}.trend-date{width:70px;font-size:10px;color:rgba(189,199,201,.48);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.trend-bar{flex:1;height:8px;background:rgba(189,199,201,.08);border-radius:6px;overflow:hidden}.trend-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--rose-l));border-radius:6px}.audio-file-box{border:1px solid rgba(91,163,168,.22);background:rgba(10,22,34,.72);border-radius:16px;padding:13px;margin:12px 0}.audio-file-box audio{width:100%;margin-top:10px}.audio-file-box input{width:100%;font-size:12px;color:var(--sage);margin-top:10px}.rem-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-bottom:1px solid rgba(189,199,201,.08);padding:12px 0}.rem-row:last-child{border-bottom:none}.time-input{background:rgba(10,22,34,.72);border:1px solid var(--b);border-radius:12px;color:var(--peach);padding:9px}.search{width:100%;border:1px solid var(--b);background:rgba(10,22,34,.62);border-radius:14px;padding:12px;color:var(--peach);margin-bottom:10px}.mini-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.mini-btn{border:1px solid var(--b);background:rgba(189,199,201,.07);color:var(--peach);border-radius:999px;padding:8px 11px;font-size:12px;cursor:pointer}@media(max-width:380px){.practice-grid,.analytics-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cf" id="cf"></div>
+<section class="S on" id="s-onboard"><div class="roll" style="display:flex;align-items:center;justify-content:center"><div class="assess-wrap" id="assess"></div></div></section>
+<section class="S" id="s-home"><div class="roll">
+  <div class="logo-row"><div class="logo-mark">🌿</div><div style="flex:1"><div class="logo-name">Connect Me To Me</div><div class="logo-tag">Your inner journey</div></div><span class="pill" id="streak-pill">🔥 1 day</span></div>
+  <div class="sec">
+    <div class="card b-teal" id="continue-card"><div class="slbl">Continue Where You Left Off</div><h1 class="title-xl" id="continue-title">Your Inner Journey</h1><p class="sub" id="continue-sub">Begin with your daily reconnection ritual.</p><button class="btn teal full" style="margin-top:14px" onclick="go(lastScreen||'s-ritual')">Continue</button></div>
+    <div class="dash">
+      <div class="metric"><div class="lbl">Inner Connection</div><div class="num" id="conn-num">—</div><div class="xp-bar"><div class="xp-fill" id="conn-fill"></div></div></div>
+      <div class="metric"><div class="lbl">Practised</div><div class="num" id="prac-num">0</div><div class="tiny">lessons / rituals completed</div></div>
+      <div class="metric"><div class="lbl">Entries</div><div class="num" id="hist-num">0</div><div class="tiny">saved in your journey archive</div></div>
+      <div class="metric"><div class="lbl">Stage</div><div class="num" id="stage-num" style="font-size:18px;margin-top:7px">Awareness</div><div class="tiny">current inner journey stage</div></div>
+    </div>
+    <div class="card b-navy"><div class="slbl">Inner Connection Dashboard</div><div id="trend-box" class="empty">Complete a check-in to see your inner journey archive.</div></div>
+    <div class="card b-gold"><div class="slbl">Inner Journey Map</div><div class="journey" id="journey-map"></div></div>
+  </div>
+</div></section>
+<section class="S" id="s-ritual"><div class="bar"><div class="sp"></div><span class="bar-title">Inner Connection Practice</span><div class="sp"></div></div><div class="roll"><div class="sec">
+  <div class="card b-teal"><div class="slbl">Lightweight Daily Check-In</div><h1 class="title-xl">How connected do you feel to yourself today?</h1><div class="slider" id="conn-slider" onclick="setSlider(event,'conn')"><div class="slider-fill" id="conn-fill2"></div><div class="slider-num" id="conn-num2">5</div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="tiny">Disconnected</span><span class="tiny">Present</span></div></div>
+  <div class="card b-navy"><div class="slbl">Feeling Check</div><p>How do you feel right now?</p><div class="checkin-row" id="feelings-chips"></div></div>
+  <div class="card b-gold"><div class="slbl">Inner Connection Practice Category</div><h1 class="title-xl">Return to Yourself</h1><p class="sub">Choose one small practice before journaling, or move directly into the Inner Child / Compassionate Adult conversation.</p><div class="practice-grid">
+    <div class="practice-card" onclick="openPractice('breathwork')"><h4>Short Breathwork Ritual</h4><p>A simple breathing pause to return to yourself.</p></div>
+    <div class="practice-card" onclick="openPractice('body')"><h4>Body Check-In</h4><p>Notice where the feeling lives in the body.</p></div>
+    <div class="practice-card" onclick="openPractice('heart')"><h4>Somatic Exercise</h4><p>Gentle body-based practices to release tension and return to yourself.</p></div>
+    <div class="practice-card" onclick="openPractice('groundingMoment')"><h4>Nervous System Grounding Moment</h4><p>Orient to the present moment through the senses.</p></div>
+  </div></div>
+  <div class="card b-rose"><div class="slbl">Live Interactive Journaling</div><h1 class="title-xl">Inner Child / Compassionate Adult Conversation</h1><p>Move step by step: Adult asks, Inner Child responds, Compassionate Adult answers, then reconnection is saved to your archive.</p><button class="btn teal full" style="margin-top:12px" onclick="openPractice('dialogue')">Start Live Dialogue</button></div>
+  <div class="card b-navy"><div class="slbl">Quick Save</div><p>Prefer one open reflection box today?</p><textarea id="ritual-note" placeholder="Write your response here..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="saveRitual()">Save Ritual</button></div>
+</div></div></section>
+<section class="S" id="s-journey"><div class="bar"><div class="sp"></div><span class="bar-title">Inner Journey</span><div class="sp"></div></div><div class="roll"><div class="sec">
+  <div class="card b-teal"><div class="slbl">PART I — Returning to Yourself</div><h1 class="title-xl">Building Inner Connection</h1><p class="sub">Emotional Awareness · Inner Child Connection · Supportive Compassionate Adult · Grounding & Self Nourishment</p></div>
+  <div class="lesson-card" onclick="openLesson('emotional-awareness')"><h3>Emotional Awareness</h3><p>Emotions are neurobiological responses of our body to our thoughts, inner dialogue and outer circumstances.</p><span class="pill" id="p-emotional-awareness">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('inner-child')"><h3>Inner Child Connection</h3><p>The foundation of inner connection is the relationship between our adult self and our inner child.</p><span class="pill" id="p-inner-child">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('supportive-adult')"><h3>Supportive Compassionate Adult</h3><p>We become a supportive compassionate adult when we take responsibility for our feelings and our inner child's feelings.</p><span class="pill" id="p-supportive-adult">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('grounding')"><h3>Grounding & Self Nourishment</h3><p>Choose daily practices to give love and care to yourself.</p><span class="pill" id="p-grounding">Not visited</span></div>
+
+  <div class="card b-rose" style="margin-top:16px"><div class="slbl">PART II — Why We Disconnect From Ourselves</div><h1 class="title-xl">Self-Abandonment</h1><p class="sub">We disconnect from ourselves when we leave our own feelings, needs, and inner child behind.</p></div>
+  <div class="card b-navy"><div class="slbl">Self-Abandonment Patterns</div><ul class="clean"><li><span>✓</span><span>Seeking love, acceptance, admiration and approval from others.</span></li><li><span>✓</span><span>Taking care of others' needs and wants more than our own.</span></li><li><span>✓</span><span>Putting others in charge of meeting our needs.</span></li><li><span>✓</span><span>Feeling worthy and good enough ONLY when we achieve something.</span></li><li><span>✓</span><span>Distracting ourselves to avoid uncomfortable feelings and the pain of loneliness.</span></li><li><span>✓</span><span>Using the same mechanisms from childhood to gain love, acceptance and feel secure.</span></li></ul></div>
+  <div class="lesson-card" onclick="openLesson('mind-filter')"><h3>Mind's Filter</h3><p>The stories our mind creates.</p><span class="pill" id="p-mind-filter">Not visited</span></div>
+  <div class="lesson-card" onclick="go('s-inner-voice-menu')"><h3>Inner Voice</h3><p>The voices that pull us away from connection.</p><span class="pill">Explore</span></div>
+  <div class="lesson-card" onclick="go('s-armour-menu')"><h3>Armour</h3><p>How we learned to survive emotionally.</p><span class="pill">Explore</span></div>
+</div></div></section>
+
+<section class="S" id="s-inner-voice-menu"><div class="bar"><button class="ib" onclick="go('s-journey')">←</button><span class="bar-title">Inner Voice</span><div class="sp"></div></div><div class="roll"><div class="sec">
+  <div class="card b-navy"><div class="slbl">PART II — Inner Voice</div><h1 class="title-xl">The voices that pull us away from connection</h1><p class="sub">Inner Critic · Inner Victim · Inner Entitlement</p></div>
+  <div class="lesson-card" onclick="openLesson('inner-voice')"><h3>Inner Voice Overview</h3><p>How inner talk gives meaning to our experience.</p><span class="pill" id="p-inner-voice">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('inner-critic')"><h3>Inner Critic</h3><p>The voice that attacks connection.</p><span class="pill" id="p-inner-critic">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('inner-victim')"><h3>Inner Victim</h3><p>The voice that feels powerless, stuck, and unsupported.</p><span class="pill" id="p-inner-victim">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('inner-entitlement')"><h3>Inner Entitlement</h3><p>The voice that makes others responsible for our needs and wants.</p><span class="pill" id="p-inner-entitlement">Not visited</span></div>
+</div></div></section>
+
+<section class="S" id="s-armour-menu"><div class="bar"><button class="ib" onclick="go('s-journey')">←</button><span class="bar-title">Armour</span><div class="sp"></div></div><div class="roll"><div class="sec">
+  <div class="card b-navy"><div class="slbl">PART II — Armour</div><h1 class="title-xl">How we learned to survive emotionally</h1><p class="sub">Unworthiness · Codependency · Pain Killer / Numbing</p></div>
+  <div class="lesson-card" onclick="openLesson('armour')"><h3>Armour Overview</h3><p>Protection mechanisms and self-abandonment patterns that block inner connection.</p><span class="pill" id="p-armour">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('unworthiness')"><h3>Unworthiness / Shame</h3><p>Mechanisms we use to feel worthy, adequate, and enough.</p><span class="pill" id="p-unworthiness">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('codependency')"><h3>Codependency</h3><p>Abandoning ourselves to secure connection.</p><span class="pill" id="p-codependency">Not visited</span></div>
+  <div class="lesson-card" onclick="openLesson('pain-killer')"><h3>Pain Killer / Numbing</h3><p>How we escape ourselves to avoid feeling pain, shame, and loneliness.</p><span class="pill" id="p-pain-killer">Not visited</span></div>
+</div></div></section>
+<section class="S" id="s-history"><div class="bar"><div class="sp"></div><span class="bar-title">Inner Journey Archive</span><div class="sp"></div></div><div class="roll"><div class="sec"><div class="card b-navy"><div class="slbl">Saved Inner Journey</div><input class="search" id="history-search" placeholder="Search your archive..." oninput="renderHistory()"><div class="mini-actions"><button class="mini-btn" onclick="exportHistory()">Export</button><button class="mini-btn" onclick="clearHistoryConfirm()">Clear</button></div><div id="history-list" class="empty">No saved entries yet.</div></div></div></div></section>
+
+<section class="S" id="s-reminders"><div class="bar"><div class="sp"></div><span class="bar-title">Reminders</span><div class="sp"></div></div><div class="roll"><div class="sec">
+  <div class="card b-teal"><div class="slbl">Real Browser Notifications</div><h1 class="title-xl">Gentle reminders to return</h1><p class="sub">These reminders work while this HTML page is open in a browser and notifications are allowed.</p><button class="btn teal full" style="margin-top:12px" onclick="enableNotifications()">Enable Notifications</button><p class="tiny" id="notify-status" style="margin-top:10px">Notification permission not requested yet.</p></div>
+  <div class="card b-navy"><div class="slbl">Reminder Times</div>
+    <div class="rem-row"><div><b style="color:var(--peach)">Morning</b><p class="tiny">How do you want to care for yourself today?</p></div><input class="time-input" id="rem-morning" type="time" value="09:00"></div>
+    <div class="rem-row"><div><b style="color:var(--peach)">Midday</b><p class="tiny">Pause. Breathe. Return.</p></div><input class="time-input" id="rem-midday" type="time" value="13:00"></div>
+    <div class="rem-row"><div><b style="color:var(--peach)">Evening</b><p class="tiny">What does your inner world need tonight?</p></div><input class="time-input" id="rem-evening" type="time" value="20:30"></div>
+    <button class="btn full" style="margin-top:12px" onclick="saveReminderSettings()">Save Reminder Settings</button>
+  </div>
+</div></div></section>
+<nav class="bnav" id="nav" style="display:none"><div class="nav-row">
+  <div class="ni on" id="n-home" onclick="go('s-home');setN('n-home')"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Home</span></div>
+  <div class="ni" id="n-ritual" onclick="go('s-ritual');setN('n-ritual')"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Ritual</span></div>
+  <div class="ni" id="n-journey" onclick="go('s-journey');setN('n-journey')"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Journey</span></div>
+  <div class="ni" id="n-history" onclick="go('s-history');setN('n-history')"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg><span>Archive</span></div>
+  <div class="ni" id="n-reminders" onclick="go('s-reminders');setN('n-reminders')"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Remind</span></div>
+</div></nav>
+<div class="modal" id="lesson-modal" onclick="closeLesson()"><div class="sheet" onclick="event.stopPropagation()"><div class="mhd"><span class="mtitle" id="lesson-title">Lesson</span><button class="close" onclick="closeLesson()">✕</button></div><div id="lesson-body"></div></div></div>
+<script>
+const LS='cmtm-polished-v3-onboarding';let state={onboard:false,answers:[],xp:0,streak:1,lastScreen:'s-ritual',conn:null,feelings:[],history:[],completed:{},checkins:[]};try{state={...state,...JSON.parse(localStorage.getItem(LS)||'{}')}}catch(e){}
+const assessQ=[{q:"How connected do you feel to your inner self right now?",opts:["Very disconnected","Somewhat disconnected","Somewhere in the middle","Somewhat connected","Deeply connected"]},{q:"When undesirable feelings arise, how do you typically respond?",opts:["I push them away","I get overwhelmed by them","I notice them but struggle","I try to sit with them"]},{q:"How familiar are you with your inner child?",opts:["What's an inner child?","I've heard of it","I've explored this a little","I practise this regularly"]},{q:"How would you describe your inner voice?",opts:["Harsh and critical","Worried and anxious","Mostly quiet / neutral","Warm and supportive"]},{q:"What brings you here today?",opts:["Emotional healing","Understanding myself better","Improving my relationships","Daily self-care practices","All of the above"]}];
+let ai=-1, selectedFeeling='', connVal=5, synth=window.speechSynthesis, playing=false, utter=null, rate=1, timer=null, started=0,dur=0;
+if(new URLSearchParams(location.search).get('resetOnboarding')==='1'){
+  state.onboard=false;
+  state.answers=[];
+  state.lastScreen='s-ritual';
+  localStorage.setItem(LS,JSON.stringify(state));
+}
+const lessons={
+'emotional-awareness':{title:'Emotional Awareness',stage:'Awareness',part:'PART I — Returning to Yourself',text:`Emotions are neurobiological responses of our body to our thoughts, inner dialogue and outer circumstances. Either way — they are real.
+
+All emotions are valuable, whether desirable or not. The uncomfortable ones act as an alarm — a signal that an unmet basic need wants our attention, care and love.
+
+Mindfully allowing emotions to be present, and giving them space, is what keeps us from being pulled into them and controlled by them.`,practice:`How do you feel right now?
+Use the feelings directory if you can't name it.
+Rate the intensity of the feelings from 0–10.`},
+'inner-child':{title:'Inner Child Connection',stage:'Connection',part:'PART I — Returning to Yourself',text:`The foundation of inner connection is the relationship between our adult self and our inner child.
+
+How do we give love and care to ourselves the way a compassionate parent gives it to their child?
+
+How do we soothe and comfort ourselves when undesirable feelings arise?
+
+What do we do in daily life as an act of love and care for ourselves? How is our inner conversation? What's our tone of voice?`,practice:`Adult: What do you need from me right now?
+Inner Child: respond naturally.
+Adult: respond with care.`},
+'supportive-adult':{title:'Supportive Compassionate Adult',stage:'Compassion',part:'PART I — Returning to Yourself',text:`We become a supportive compassionate adult when we take responsibility for our feelings and our inner child's feelings — and when we soothe and comfort ourselves exactly as a loving, compassionate parent would.
+
+In this way, we stop expecting others to be responsible for our happiness or to meet our needs for love, acceptance and security. And we stop feeling responsible for others' happiness too.
+
+Our inner child feels we are truly there for them — that they have our support and are not alone. At the same time, we gently guide ourselves toward growth — with care, understanding and compassion.`,practice:`Write one supportive adult response to yourself today.`},
+'grounding':{title:'Grounding & Self Nourishment',stage:'Nourishment',part:'PART I — Returning to Yourself',text:`From the list below — which of these do you practise as an act of care and love for yourself?
+
+What do you do to comfort and soothe yourself when undesirable feelings arise?
+
+Choose DAILY PRACTICES to give love and care to yourself.
+
+Active writing / journaling with pen and paper. Mindfulness / Meditation / Breath Practice. Compassionate Adult / Inner Child Conversation / Journaling. Supportive & caring Adult for your inner child. Body movement / exercise. Healthy nutrition and HOME-MADE food cooked with love and joy. Loving caring bath and touch with scrub and oil massage. Candle and essential oil. Reaching out to others to help soothe you.`,practice:`Choose daily practices to give love and care to yourself.`},
+'mind-filter':{title:`Mind's Filter`,stage:`Mind Filter`,part:'PART II — Why We Disconnect From Ourselves',text:`What's the source of our mind's filter?
+
+Core Beliefs.
+
+Our brain is wired based on the patterns and belief system that run the show behind the curtain. These patterns create negative thoughts and inner voices — and the associated feelings follow.
+
+In disconnected mode, the world is observed through the filter of our mind perceptions. The story that this filter makes from life circumstances seems so real but it is reality of our mind.
+
+Event: My friend didn't reply to my message.
+Inner Voice: Why hasn't she replied? Is she angry with me? What if she doesn't like me anymore?
+Feelings: Ignored · Rejected · Disappointed · Sad
+Core Beliefs: I'm boring · I'm not important · I don't matter`,practice:`What actually happened? Write only the bare fact — not your mind's interpretation. Then write the story your mind created.`},
+'inner-voice':{title:'Inner Voice',stage:'Inner Voice',part:'PART II — Why We Disconnect From Ourselves',text:`Inner negative voice is a whispering voice back of our mind. We identify ourselves with this voice and our thoughts and can't differentiate them from ourselves as they sound so real.
+
+Inner negative talk gives meaning to our experience. The voice pretends what it's telling us is truth and makes us believing it.
+
+In this way, it prevents us to reach our highest potential, to reach our desires and goals.`,practice:`Notice the voice at the back of your mind. What meaning is it giving to your experience?`},
+'inner-critic':{title:'Inner Critic',stage:'Inner Voice',part:'PART II — Inner Voice',text:`Can you recognise the inner critic voice whispering at the back of your mind?
+
+The inner critic judges us in a mean, harsh, devaluing tone. It uses shame to push us toward progress — but in a destructive way. It targets our competency, adequacy and worthiness.
+
+Core Negative Beliefs: I'm unworthy. I'm inadequate. I'm not enough. I'm useless. I'm stupid.
+
+Associated Feelings: Shame. Unworthiness. Inadequacy. Deficiency.`,practice:`Write the negative inner voice, then rewrite it as a compassionate adult would speak.`},
+'inner-victim':{title:'Inner Victim',stage:'Inner Voice',part:'PART II — Inner Voice',text:`What about inner victim voice? Can you recognize it?
+
+The inner victim blames life and others for lack of what doesn't exist like desirable education, career, relationship, financial situation.
+
+It passively rejects present moment as it's not the way it SHOULD be. Inner victim doesn't allow us to see our contribution in where we're standing in life.
+
+Core negative beliefs: I'm supportless, I'm helpless, I'm powerless, I'm a failure.
+
+Associated feelings: Miserable, Disappointed, Frustrated, Powerless, Supportless, Trapped, Unable to change.`,practice:`Where do you feel powerless or unsupported? What part of you needs support?`},
+'inner-entitlement':{title:'Inner Entitlement',stage:'Inner Voice',part:'PART II — Inner Voice',text:`What about inner entitlement voice? Can you recognize it?
+
+It's all about me. Others are responsible for my needs and wants. I'm the best. I'm right, you're wrong. You can have whatever you want. Others owe me everything. It wasn't my fault, it's yours.
+
+The inner entitlement voice makes us feel we are the center of the world and that others must meet our needs and expectations.`,practice:`Where do you expect others to meet a need that your supportive adult can begin to care for?`},
+'armour':{title:'Armour / Protection Mechanisms',stage:'Armour',part:'PART II — Why We Disconnect From Ourselves',text:`As young children, to feel safe and to earn love and acceptance, we developed certain mechanisms — and we carry these same mechanisms into adulthood with the same intention.
+
+Perfectionism, codependency, people-pleasing, narcissism and blaming are examples of our coping mechanisms.
+
+We use the same mechanisms from childhood to gain love, acceptance and feel secure.
+
+Self-Abandonment: We abandon ourselves when we seek love, acceptance, admiration and approval from others; when we take care of others' needs and wants more than our own; when we put others in charge of meeting our needs; when we feel worthy and good enough ONLY when we achieve something; when we distract ourselves to avoid feeling uncomfortable feelings and the pain of loneliness.`,practice:`Which armour do you recognise in yourself today? Where do you abandon yourself?`},
+'unworthiness':{title:'Unworthiness / Shame',stage:'Armour',part:'PART II — Armour',text:`Can you recognise what mechanisms you use to feel worthy, adequate and enough?
+
+Unworthiness and shame are deeply uncomfortable to experience. So early in life, we learned mechanisms to hide them and prevent them from surfacing.
+
+Why do we use blaming and criticizing? To be in control, to progress and avoid mistakes. However, for some people the painful direction of blaming focuses on themselves — and for some others it is focused on others.
+
+Unworthiness / Shame Spectrum. Self-Focused: Perfectionism, Overachiever, Self Sabotaging, Self Blaming. Other-Focused: Entitlement, Self-Absorbed, Overachiever, Others Sabotaging, Others Blaming, Others Ridiculing.`,practice:`Can you recognise what mechanisms you use to feel worthy, adequate and enough?`},
+'codependency':{title:'Codependency',stage:'Armour',part:'PART II — Armour',text:`Can you identify your codependency pattern — do you go into a caregiver role or a caretaker role?
+
+Caregiver / Other Pleaser: Makes others comfortable at own expense. Others' needs feel more important. Loose boundaries. Emotionally Deprived. Approval Seeker.
+
+Caretaker / Self Centred: Self-Centred. Emotionally Demanding. Admiration Seeker. Superiority. Manipulating.
+
+Both patterns come from the same root — unmet needs and difficulty being a responsible, loving adult for ourselves.`,practice:`Can you identify your codependency pattern — do you go into a caregiver role or a caretaker role?`},
+'pain-killer':{title:'Pain Killer / Numbing',stage:'Armour',part:'PART II — Armour',text:`What's your pain killer? What do you use to numb yourself — to avoid feeling the pain, the shame, and to silence the voice at the back of your mind?
+
+Drugs & Alcohol. Eating. Sex. Shopping. Gaming. Smartphone. Netflix. Gym. Travelling. Partying. Clubbing. Pain Killers.
+
+These are the ways we avoid sitting with difficult feelings — instead of processing them with compassion and self-care.`,practice:`What's your pain killer? What do you use to numb yourself — to avoid feeling the pain, the shame, and to silence the voice at the back of your mind?`},
+'self-abandonment':{title:'Self-Abandonment',stage:'Self-Abandonment',part:'PART II — Why We Disconnect From Ourselves',text:`We abandon ourselves when we seek love, acceptance, admiration and approval from others.
+
+We abandon ourselves when we take care of others' needs and wants more than our own.
+
+We abandon ourselves when we put others in charge of meeting our needs.
+
+We abandon ourselves when we feel worthy and good enough ONLY when we achieve something.
+
+We abandon ourselves when we distract ourselves to avoid feeling uncomfortable feelings and the pain of loneliness.
+
+We abandon ourselves when we use the same mechanisms from childhood to gain love, acceptance and feel secure.`,practice:`Where do you abandon yourself? What would supportive adult care look like here?`}
+};
+function save(){localStorage.setItem(LS,JSON.stringify(state));renderDash();renderHistory();renderPills()}
+function go(id){document.querySelectorAll('.S').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');state.lastScreen=id;save();let r=document.querySelector('#'+id+' .roll');if(r)r.scrollTop=0}
+function setN(id){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));document.getElementById(id).classList.add('on')}
+function start(){
+  document.querySelectorAll('.S').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s-home').classList.add('on');
+  document.getElementById('nav').style.display='block';
+  state.onboard=true;
+  state.lastScreen='s-ritual';
+  save();
+}
+function initOnboard(){
+  if(state.onboard){start();return}
+  document.querySelectorAll('.S').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s-onboard').classList.add('on');
+  document.getElementById('nav').style.display='none';
+  document.getElementById('assess').innerHTML=`<div style="font-size:56px;margin-bottom:16px">🌿</div><h1 class="title-xl">Welcome to<br>Connect Me To Me</h1><p class="sub" style="margin:12px 0 28px">Let's take a moment to understand where you are on your inner journey.</p><button class="btn" onclick="nextA()">Begin ✦</button>`
+}
+function nextA(){ai++;if(ai>=assessQ.length){finishA();return}let q=assessQ[ai];let dots='<div class="assess-progress">'+assessQ.map((_,i)=>`<div class="assess-dot ${i<ai?'done':i===ai?'now':''}"></div>`).join('')+'</div>';document.getElementById('assess').innerHTML=dots+`<div class="assess-q">${q.q}</div><div class="assess-opts">`+q.opts.map(o=>`<button class="assess-opt" onclick="pickA(this,'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')+'</div>'}
+function pickA(el,o){el.classList.add('picked');state.answers[ai]=o;setTimeout(nextA,450)}
+function finishA(){let list=state.answers.map((a,i)=>`<li><span>✓</span><span>${a}</span></li>`).join('');document.getElementById('assess').innerHTML=`<div style="font-size:54px;margin-bottom:14px">✨</div><h2 class="title-xl">Your Inner Connection Snapshot</h2><div class="band b-teal" style="text-align:left;margin-top:18px"><ul class="clean">${list}</ul></div><button class="btn teal" onclick="start()">Begin My Journey 🌿</button>`}
+const feelings=['Calm','Anxious','Sad','Frustrated','Disconnected','Loved','Worried','Uncomfortable'];
+function renderFeelings(){document.getElementById('feelings-chips').innerHTML=feelings.map(f=>`<button class="chip" onclick="pickFeeling(this,'${f}')">${f}</button>`).join('')}
+function pickFeeling(el,f){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');selectedFeeling=f}
+function setSlider(e,type){let box=e.currentTarget,r=box.getBoundingClientRect(),pct=Math.max(0,Math.min(100,((e.clientX-r.left)/r.width)*100)),val=Math.round(pct/10);connVal=val;document.getElementById('conn-fill2').style.width=pct+'%';document.getElementById('conn-num2').textContent=val}
+function saveRitual(){let note=document.getElementById('ritual-note').value.trim();let entry={date:new Date().toLocaleString(),connection:connVal,feeling:selectedFeeling||'Not selected',note};state.conn=connVal;state.checkins.push(entry);state.history.unshift({type:'Daily Reconnection Ritual',...entry});state.completed.ritual=true;state.xp+=20;state.lastScreen='s-ritual';document.getElementById('ritual-note').value='';selectedFeeling='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));confetti();save();go('s-home');setN('n-home')}
+function openLesson(id){let l=lessons[id];state.lastScreen='s-journey';state.completed[id]=state.completed[id]||'visited';save();document.getElementById('lesson-title').textContent=l.title;document.getElementById('lesson-body').innerHTML=`<div class="slbl">${l.part}</div><div class="card b-teal"><p>${l.text.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</p></div><div class="vp"><div class="vp-top"><div class="vp-lbl">🎧 Listen</div><div style="display:flex;gap:7px;align-items:center"><div class="wv" id="wv"><span></span><span></span><span></span><span></span><span></span></div><button class="spd" onclick="cycleRate()" id="rateBtn">${rate}×</button></div></div><div class="vp-row"><button class="vbtn" onclick="toggleVoice(\`${(l.title+'. '+l.text+' '+l.practice).replace(/`/g,'')}\`)"><span id="playIcon">▶</span></button><div class="vbar"><div class="vtrack"><div class="vfill" id="audioFill"></div></div><div class="vtimes"><span id="audioTime">0:00</span><span>audio-ready</span></div></div></div><div class="tiny" style="margin-top:8px">For real human voice, replace this browser voice with recorded/ElevenLabs audio files using this same player area.</div></div><div class="card b-rose"><div class="slbl">Practice</div><p>${l.practice}</p><textarea id="lesson-note" placeholder="Write your reflection here..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="completeLesson('${id}')">Save Reflection / Mark Practised</button></div>`;document.getElementById('lesson-modal').classList.add('on')}
+function closeLesson(){stopVoice();stopBreathVoice();document.getElementById('lesson-modal').classList.remove('on')}
+function completeLesson(id){let note=document.getElementById('lesson-note').value.trim();state.completed[id]='practised';state.xp+=15;state.history.unshift({type:lessons[id].title,date:new Date().toLocaleString(),connection:state.conn??'—',feeling:lessons[id].stage,note});confetti();save();closeLesson()}
+function renderPills(){Object.keys(lessons).forEach(id=>{let el=document.getElementById('p-'+id);if(!el)return;let v=state.completed[id];el.textContent=v==='practised'?'Practised':v==='visited'?'Visited':'Not visited';el.className='pill '+(v?'done':'')})}
+function renderDash(){document.getElementById('streak-pill').textContent='🔥 '+(state.streak||1)+' day';document.getElementById('conn-num').textContent=state.conn===null?'—':state.conn+'/10';document.getElementById('conn-fill').style.width=(state.conn===null?0:state.conn*10)+'%';document.getElementById('prac-num').textContent=Object.values(state.completed).filter(Boolean).length;document.getElementById('hist-num').textContent=state.history.length;let stages=['Awareness','Inner Child','Supportive Adult','Mind Filter','Inner Voice','Armour','Inner Connect'];let done=Object.values(state.completed).filter(Boolean).length;document.getElementById('stage-num').textContent=stages[Math.min(Math.floor(done/2),stages.length-1)];document.getElementById('journey-map').innerHTML=stages.map((s,i)=>`<div class="node ${i<Math.floor(done/2)?'done':i===Math.floor(done/2)?'active':''}"><div class="emoji">${['🌫','🌿','💛','🧠','🗣','🛡','✨'][i]}</div><h4>${s}</h4><p>${i<3?'Returning to Yourself':i<6?'Why We Disconnect':'Returning to myself again and again.'}</p></div>`).join('');let recent=state.checkins.slice(-7);document.getElementById('trend-box').innerHTML=recent.length?recent.map(x=>`<div style="margin:8px 0"><div class="tiny">${x.feeling} · connection ${x.connection}/10</div><div class="xp-bar"><div class="xp-fill" style="width:${x.connection*10}%"></div></div></div>`).join(''):'Complete a check-in to see your emotional history.'}
+function renderHistory(){let box=document.getElementById('history-list');if(!box)return;box.innerHTML=state.history.length?state.history.map(h=>`<div class="history-item"><h4>${h.type} · ${h.date}</h4><p>Feeling: ${h.feeling} · Connection: ${h.connection}/10</p>${h.note?`<p>${h.note}</p>`:''}</div>`).join(''):'No saved entries yet.'}
+function voice(){let vs=synth.getVoices();return vs.find(v=>/Samantha|Karen|Moira|Fiona|Victoria|Google UK English Female|Zira/i.test(v.name))||vs.find(v=>v.lang&&v.lang.startsWith('en'))||vs[0]}
+function toggleVoice(text){
+  if(playing){stopVoice();return}
+  if(!('speechSynthesis' in window)){alert('Text voice is not supported in this browser.');return}
+  try{speechSynthesis.cancel(); speechSynthesis.resume();}catch(e){}
+  utter=new SpeechSynthesisUtterance(text);
+  utter.rate=rate; utter.pitch=.92; utter.volume=1;
+  let v=voice(); if(v) utter.voice=v;
+  playing=true;
+  let pi=document.getElementById('playIcon'); if(pi) pi.textContent='❚❚';
+  let w=document.getElementById('wv'); if(w) w.classList.add('go');
+  let mode=document.getElementById('voiceMode'); if(mode) mode.textContent='text voice playing';
+  dur=Math.max(6,(text.split(/\s+/).length/(148*rate))*60); started=Date.now();
+  timer=setInterval(()=>{let e=(Date.now()-started)/1000;let f=document.getElementById('audioFill');if(f)f.style.width=Math.min(100,e/dur*100)+'%';let t=document.getElementById('audioTime');if(t)t.textContent=fmt(e)},250);
+  utter.onend=stopVoice; utter.onerror=stopVoice;
+  synth.speak(utter);
+}
+function stopVoice(){
+  try{if(synth)synth.cancel();}catch(e){}
+  playing=false; if(timer)clearInterval(timer);
+  let pi=document.getElementById('playIcon');if(pi)pi.textContent='▶';
+  let w=document.getElementById('wv');if(w)w.classList.remove('go');
+  let f=document.getElementById('audioFill');if(f)f.style.width='0%';
+  let mode=document.getElementById('voiceMode'); if(mode) mode.textContent='text voice ready';
+}
+function cycleRate(){let speeds=[1,1.25,1.5,.75];let i=speeds.indexOf(rate);rate=speeds[(i+1)%speeds.length];let b=document.getElementById('rateBtn');if(b)b.textContent=rate+'×';if(playing)stopVoice()}
+function fmt(s){let m=Math.floor(s/60),x=Math.floor(s%60);return m+':'+(x<10?'0':'')+x}
+function confetti(){let w=document.getElementById('cf');w.innerHTML='';let cs=['#845460','#5BA3A8','#EAD3C8','#D4A820','#C4929E'];for(let i=0;i<28;i++){let c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'%';c.style.top='-10px';c.style.background=cs[Math.floor(Math.random()*cs.length)];c.style.animationDelay=(Math.random()*.6)+'s';w.appendChild(c)}setTimeout(()=>w.innerHTML='',2500)}
+
+/* ---- Step 5 UX functional upgrades ---- */
+state.reminders=state.reminders||{enabled:false,morning:'09:00',midday:'13:00',evening:'20:30',sent:{}};
+state.audioNames=state.audioNames||{};
+const audioUploads={};
+const humanAudioFiles={
+  // Add your real human voice audio files here, for example:
+  // 'inner-child':'audio/inner-child.mp3',
+  // 'supportive-adult':'audio/supportive-adult.mp3'
+};
+const practiceLabels={breathwork:'Short Breathwork Ritual',body:'Body Check-In',heart:'Somatic Exercise',groundingMoment:'Nervous System Grounding Moment',dialogue:'Inner Child / Compassionate Adult Conversation'};
+let dialogue={before:5,after:5,childFeeling:'',childNeed:'',adultResponse:'',offer:''};
+
+function personalizedPath(){
+  let a=(state.answers||[]).join(' | ').toLowerCase();
+  let path='Daily Reconnection Ritual';
+  if(a.includes('very disconnected')||a.includes('inner child')||a.includes("what's an inner child")) path='Inner Child Connection';
+  if(a.includes('harsh')||a.includes('critical')) path='Inner Voice';
+  if(a.includes('push them away')||a.includes('overwhelmed')) path='Grounding & Self Nourishment';
+  if(a.includes('daily self-care')) path='Inner Connection Practice';
+  return path;
+}
+function finishA(){
+  let path=personalizedPath();
+  let list=state.answers.map((a,i)=>`<li><span>✓</span><span>${a}</span></li>`).join('');
+  document.getElementById('assess').innerHTML=`<div style="font-size:54px;margin-bottom:14px">✨</div><h2 class="title-xl">Your Inner Connection Snapshot</h2><div class="band b-teal" style="text-align:left;margin-top:18px"><div class="slbl">Your responses</div><ul class="clean">${list}</ul></div><div class="band b-rose" style="text-align:left"><div class="slbl">Suggested first path</div><p>${path}</p></div><div class="breath-orb">Breathe</div><p class="sub" style="margin-bottom:20px">One small breath before you begin.</p><button class="btn teal" onclick="start()">Begin My Journey 🌿</button>`;
+}
+function renderDash(){
+  document.getElementById('streak-pill').textContent='🔥 '+(state.streak||1)+' day';
+  document.getElementById('conn-num').textContent=state.conn===null?'—':state.conn+'/10';
+  document.getElementById('conn-fill').style.width=(state.conn===null?0:state.conn*10)+'%';
+  document.getElementById('prac-num').textContent=Object.values(state.completed||{}).filter(Boolean).length;
+  document.getElementById('hist-num').textContent=(state.history||[]).length;
+  let stages=['Awareness','Inner Child','Supportive Adult','Mind Filter','Inner Voice','Armour','Inner Connect'];
+  let done=Object.values(state.completed||{}).filter(Boolean).length;
+  document.getElementById('stage-num').textContent=stages[Math.min(Math.floor(done/2),stages.length-1)];
+  document.getElementById('journey-map').innerHTML=stages.map((s,i)=>`<div class="node ${i<Math.floor(done/2)?'done':i===Math.floor(done/2)?'active':''}"><div class="emoji">${['🌫','🌿','💛','🧠','🗣','🛡','✨'][i]}</div><h4>${s}</h4><p>${i<3?'Returning to Yourself':i<6?'Why We Disconnect':'Returning to myself again and again.'}</p></div>`).join('');
+  let recent=(state.checkins||[]).slice(-7);
+  if(!recent.length){document.getElementById('trend-box').innerHTML='Complete a check-in to see your inner connection trends.';return}
+  let vals=recent.map(x=>Number(x.connection)||0), avg=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1), change=vals.length>1?vals[vals.length-1]-vals[0]:0;
+  let feelings={}; recent.forEach(x=>{feelings[x.feeling]=(feelings[x.feeling]||0)+1});
+  let common=Object.entries(feelings).sort((a,b)=>b[1]-a[1])[0]?.[0]||'—';
+  let practised=Object.values(state.completed||{}).filter(Boolean).length;
+  document.getElementById('trend-box').innerHTML=`<div class="analytics-grid"><div class="analytic"><b>${avg}/10</b><span>avg connection</span></div><div class="analytic"><b>${change>0?'+'+change:change}</b><span>trend shift</span></div><div class="analytic"><b>${common}</b><span>common feeling</span></div><div class="analytic"><b>${practised}</b><span>practised</span></div></div><div class="trend-line">${recent.map(x=>`<div class="trend-row"><div class="trend-date">${String(x.date).split(',')[0]}</div><div class="trend-bar"><div class="trend-bar-fill" style="width:${(Number(x.connection)||0)*10}%"></div></div><span class="tiny">${x.connection}/10</span></div>`).join('')}</div>`;
+  updateContinueCard();
+}
+function updateContinueCard(){
+  let t=document.getElementById('continue-title'),s=document.getElementById('continue-sub'); if(!t||!s)return;
+  let last=(state.history||[])[0];
+  if(last){t.textContent=last.type||'Your Inner Journey';s.textContent=`Last saved: ${last.feeling||'reflection'} · ${last.date||''}`;}
+}
+function safeAudioText(l){
+  return (l.title+'. '+l.text+' '+l.practice).replace(/`/g,'').replace(/\\/g,'\\\\').replace(/\$/g,'');
+}
+function openLesson(id){
+  let l=lessons[id];state.lastScreen='s-journey';state.completed[id]=state.completed[id]||'visited';save();
+  const textForVoice=safeAudioText(l);
+  document.getElementById('lesson-title').textContent=l.title;
+  document.getElementById('lesson-body').innerHTML=`
+    <div class="slbl">${l.part}</div>
+    <div class="card b-teal"><p>${l.text.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</p></div>
+
+    <div class="vp">
+      <div class="vp-top">
+        <div class="vp-lbl">🎧 Listen</div>
+        <div style="display:flex;gap:7px;align-items:center">
+          <div class="wv" id="wv"><span></span><span></span><span></span><span></span><span></span></div>
+          <button class="spd" onclick="cycleRate()" id="rateBtn">${rate}×</button>
+        </div>
+      </div>
+      <div class="vp-row">
+        <button class="vbtn" onclick="toggleVoice(\`${textForVoice}\`)"><span id="playIcon">▶</span></button>
+        <div class="vbar"><div class="vtrack"><div class="vfill" id="audioFill"></div></div><div class="vtimes"><span id="audioTime">0:00</span><span id="voiceMode">text voice ready</span></div></div>
+      </div>
+      <div class="mini-actions" style="margin-top:10px">
+        <button class="mini-btn" onclick="toggleVoice(\`${textForVoice}\`)">Play / Stop Text Voice</button>
+        <button class="mini-btn" onclick="playHumanAudio('${id}')">Play Human Voice File</button>
+      </div>
+      <p class="tiny" style="margin-top:8px">Text voice is active now. You can also upload a real human voice audio file below.</p>
+    </div>
+
+    <div class="audio-file-box">
+      <div class="slbl">Human Voice Audio File</div>
+      <p class="tiny">Optional: upload or connect a real human voice audio file for this lesson.</p>
+      <audio id="humanAudio" controls preload="metadata"></audio>
+      <input type="file" accept="audio/*" onchange="loadHumanAudio(event,'${id}')">
+      <p class="tiny" id="audio-name-${id}">${state.audioNames[id]?'Selected: '+state.audioNames[id]:'No human voice file selected yet.'}</p>
+    </div>
+
+    <div class="card b-rose"><div class="slbl">Practice</div><p>${l.practice}</p><textarea id="lesson-note" placeholder="Write your reflection here..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="completeLesson('${id}')">Save Reflection / Mark Practised</button></div>`;
+  document.getElementById('lesson-modal').classList.add('on');
+  const audio=document.getElementById('humanAudio'); if(humanAudioFiles[id]) audio.src=humanAudioFiles[id]; if(audioUploads[id]) audio.src=audioUploads[id];
+}
+function loadHumanAudio(e,id){
+  let file=e.target.files&&e.target.files[0]; if(!file)return;
+  audioUploads[id]=URL.createObjectURL(file); state.audioNames[id]=file.name; save();
+  let audio=document.getElementById('humanAudio'); if(audio) audio.src=audioUploads[id];
+  let nm=document.getElementById('audio-name-'+id); if(nm) nm.textContent='Selected: '+file.name;
+}
+function playHumanAudio(id){
+  let audio=document.getElementById('humanAudio');
+  if(!audio || !audio.src){alert('No human voice file is connected yet. The text voice player is active — use Play / Stop Text Voice, or upload an MP3/WAV file here.');return}
+  stopVoice();
+  audio.play();
+  let mode=document.getElementById('voiceMode'); if(mode) mode.textContent='human voice file playing';
+}
+function openPractice(type){
+  let title=practiceLabels[type]; document.getElementById('lesson-title').textContent=title;
+  let body='';
+  if(type==='breathwork') body=`<div class="card b-teal">
+    <div class="slbl">Short Breathwork Ritual</div>
+    <h1 class="title-xl">Choose a breath practice</h1>
+    <p class="sub">Pick the method that feels supportive today. Keep the breath relaxed and stop if anything feels uncomfortable.</p>
+    <div class="breath-orb">Breathe</div>
+    <div class="practice-grid" style="grid-template-columns:1fr">
+      <div class="practice-card" style="min-height:auto">
+        <h4>Diaphragmatic / Belly Breathing</h4>
+        <p>Place one hand on the chest and one below the rib cage. Breathe in slowly through the nose so the stomach moves outward while the chest stays mostly still.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Diaphragmatic / Belly Breathing. Place one hand on the chest and one below the rib cage. Breathe in slowly through the nose so the stomach moves outward while the chest stays mostly still.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>4–7–8 Breathwork</h4>
+        <p>Inhale gently through your nose for 4 counts, hold your breath softly for 7 counts, then exhale slowly through your mouth for 8 counts. Repeat for a few rounds, keeping the breath relaxed and never forced.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("4\u20137\u20138 Breathwork. Inhale gently through your nose for 4 counts, hold your breath softly for 7 counts, then exhale slowly through your mouth for 8 counts. Repeat for a few rounds, keeping the breath relaxed and never forced.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Energizing Belly Pump Breath</h4>
+        <p>Inspired by Kapalabhati / rapid diaphragmatic breathing. Sit tall, inhale gently through your nose, then make short, active exhales by quickly pulling your belly inward. Let each inhale happen naturally between pumps; start with 10–20 gentle rounds, then pause and breathe normally.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Energizing Belly Pump Breath. Inspired by Kapalabhati / rapid diaphragmatic breathing. Sit tall, inhale gently through your nose, then make short, active exhales by quickly pulling your belly inward. Let each inhale happen naturally between pumps; start with 10\u201320 gentle rounds, then pause and breathe normally.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Alternate Nostril Breathing / Anulom Vilom</h4>
+        <p>Gently close one nostril, inhale through the open nostril, then switch sides and exhale through the other nostril. Continue alternating sides slowly, letting the rhythm feel calm, steady, and balanced.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Alternate Nostril Breathing / Anulom Vilom. Gently close one nostril, inhale through the open nostril, then switch sides and exhale through the other nostril. Continue alternating sides slowly, letting the rhythm feel calm, steady, and balanced.", this)'>▶ Play</button>
+        </div>
+      </div>
+    </div>
+    <textarea id="practice-note" placeholder="What do you notice after this breath practice?"></textarea>
+    <button class="btn teal full" style="margin-top:12px" onclick="savePractice('Short Breathwork Ritual')">Save Breathwork Practice</button>
+  </div>`;
+  if(type==='body') body=`<div class="card b-teal"><div class="slbl">Body Check-In</div><h1 class="title-xl">Where do you feel this?</h1><div class="body-map" id="body-map">${['Chest','Stomach','Throat','Jaw','Shoulders','Belly'].map(x=>`<button class="body-part" onclick="pickBody(this)">${x}</button>`).join('')}</div><textarea id="practice-note" placeholder="Describe the sensation gently..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="savePractice('Body Check-In')">Save Practice</button></div>`;
+  if(type==='heart') body=`<div class="card b-rose">
+    <div class="slbl">Somatic Exercise</div>
+    <h1 class="title-xl">Return through the body</h1>
+    <p class="sub">Somatic exercises are gentle body-based practices that help you notice sensations, release stored tension, and reconnect with yourself through movement, breath, sound, and touch. Choose one practice that feels supportive today and keep it soft, slow, and comfortable.</p>
+    <div class="practice-grid" style="grid-template-columns:1fr">
+      <div class="practice-card" style="min-height:auto">
+        <h4>Gentle Shaking</h4>
+        <p>Softly shake your hands, arms, shoulders, and legs while staying relaxed and aware of your body. Let the movement be light and natural, then pause and notice how your body feels.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Gentle Shaking. Softly shake your hands, arms, shoulders, and legs while staying relaxed and aware of your body. Let the movement be light and natural, then pause and notice how your body feels.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Twist & Release</h4>
+        <p>Stand or sit with your feet grounded and slowly twist your upper body side to side. Let your arms move gently and keep the movement comfortable and easy.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Twist & Release. Stand or sit with your feet grounded and slowly twist your upper body side to side. Let your arms move gently and keep the movement comfortable and easy.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Sigh & Forward Fold</h4>
+        <p>Inhale slowly, then exhale with a long sigh as you gently fold forward. Let your head, neck, and shoulders soften, then rise slowly when ready.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Sigh & Forward Fold. Inhale slowly, then exhale with a long sigh as you gently fold forward. Let your head, neck, and shoulders soften, then rise slowly when ready.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Push & Sound Release</h4>
+        <p>Bring your hands in front of your chest, inhale, then slowly push your palms forward as you exhale with a soft haaah. Imagine creating space between you and the tension.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Push & Sound Release. Bring your hands in front of your chest, inhale, then slowly push your palms forward as you exhale with a soft haaah. Imagine creating space between you and the tension.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Bee Humming Breath</h4>
+        <p>Soften your eyes, inhale through your nose, then exhale with a gentle humming mmm sound. Repeat a few rounds and notice the vibration in your face, throat, and chest.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Bee Humming Breath. Soften your eyes, inhale through your nose, then exhale with a gentle humming mmm sound. Repeat a few rounds and notice the vibration in your face, throat, and chest.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Voo Sound</h4>
+        <p>Take a slow inhale, then exhale with a deep, steady vooooo sound. Let the vibration move through your chest and belly, then pause and notice any grounding.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Voo Sound. Take a slow inhale, then exhale with a deep, steady vooooo sound. Let the vibration move through your chest and belly, then pause and notice any grounding.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>Butterfly Hug Tapping</h4>
+        <p>Cross your arms over your chest and rest your hands on opposite shoulders or upper arms. Tap gently left-right-left-right while breathing slowly.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("Butterfly Hug Tapping. Cross your arms over your chest and rest your hands on opposite shoulders or upper arms. Tap gently left-right-left-right while breathing slowly.", this)'>▶ Play</button>
+        </div>
+      </div>
+      <div class="practice-card" style="min-height:auto">
+        <h4>EFT Tapping</h4>
+        <p>Tap gently on common EFT points such as the side of hand, eyebrow, side of eye, under eye, under nose, chin, collarbone, under arm, and top of head. Repeat a calming phrase such as, Even though I feel this tension, I am safe to soften.</p>
+        <div class="mini-actions">
+          <button class="mini-btn" onclick='toggleBreathVoice("EFT Tapping. Tap gently on common EFT points such as the side of hand, eyebrow, side of eye, under eye, under nose, chin, collarbone, under arm, and top of head. Repeat a calming phrase such as, Even though I feel this tension, I am safe to soften.", this)'>▶ Play</button>
+        </div>
+      </div>
+    </div>
+    <textarea id="practice-note" placeholder="What do you notice in your body after this practice?"></textarea>
+    <button class="btn teal full" style="margin-top:12px" onclick="savePractice('Somatic Exercise')">Save Somatic Exercise</button>
+  </div>`;
+  if(type==='groundingMoment') body=`<div class="card b-gold"><div class="slbl">Nervous System Grounding Moment</div><h1 class="title-xl">Orient to now</h1><ul class="clean"><li><span>✓</span><span>One thing I can see</span></li><li><span>✓</span><span>One thing I can feel</span></li><li><span>✓</span><span>One breath I can soften</span></li></ul><textarea id="practice-note" placeholder="Write what you noticed..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="savePractice('Nervous System Grounding Moment')">Save Practice</button></div>`;
+  if(type==='dialogue') body=dialogueHTML();
+  document.getElementById('lesson-body').innerHTML=body; document.getElementById('lesson-modal').classList.add('on');
+}
+function pickBody(el){document.querySelectorAll('.body-part').forEach(x=>x.classList.remove('sel'));el.classList.add('sel')}
+function savePractice(type){
+  let note=document.getElementById('practice-note')?.value?.trim()||'';
+  let body=document.querySelector('.body-part.sel')?.textContent||'';
+  state.history.unshift({type,date:new Date().toLocaleString(),connection:state.conn??connVal,feeling:body||selectedFeeling||type,note});
+  state.completed[type]=true; state.xp+=12; confetti(); save(); closeLesson();
+}
+
+let breathVoiceBtn=null, breathVoiceUtter=null;
+function toggleBreathVoice(text,btn){
+  if(!('speechSynthesis' in window)){alert('Voice playback is not supported in this browser.');return}
+  if(breathVoiceBtn===btn && speechSynthesis.speaking){
+    stopBreathVoice();
+    return;
+  }
+  stopBreathVoice();
+  stopVoice();
+  breathVoiceBtn=btn;
+  breathVoiceUtter=new SpeechSynthesisUtterance(text);
+  breathVoiceUtter.rate=.92;
+  breathVoiceUtter.pitch=.95;
+  breathVoiceUtter.volume=1;
+  let v=voice();
+  if(v) breathVoiceUtter.voice=v;
+  btn.textContent='❚❚ Pause';
+  breathVoiceUtter.onend=stopBreathVoice;
+  breathVoiceUtter.onerror=stopBreathVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(breathVoiceUtter);
+}
+function stopBreathVoice(){
+  try{if('speechSynthesis' in window) speechSynthesis.cancel();}catch(e){}
+  if(breathVoiceBtn) breathVoiceBtn.textContent='▶ Play';
+  breathVoiceBtn=null;
+  breathVoiceUtter=null;
+}
+
+function dialogueHTML(){dialogue={before:connVal,after:connVal,childFeeling:'',childNeed:'',adultResponse:'',offer:''};return `<div class="card b-rose"><div class="slbl">Before Connection</div><h1 class="title-xl">How connected do you feel before this dialogue?</h1><div class="slider" onclick="setDialogueSlider(event,'before')"><div class="slider-fill" id="dlg-before-fill" style="width:${dialogue.before*10}%"></div><div class="slider-num" id="dlg-before-num">${dialogue.before}</div></div></div><div class="step-dots"><span class="step-dot on"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span></div><div id="dialogue-steps"><div class="dialogue-step on"><div class="card b-navy"><div class="slbl">Adult asks</div><h1 class="title-xl">How are you feeling right now?</h1><textarea id="dlg-child-feeling" placeholder="Inner Child: I feel..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="nextDialogue(1)">Next</button></div></div><div class="dialogue-step"><div class="card b-navy"><div class="slbl">Adult listens</div><h1 class="title-xl">What do you need from me?</h1><textarea id="dlg-child-need" placeholder="Inner Child: I need..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="nextDialogue(2)">Next</button></div></div><div class="dialogue-step"><div class="card b-teal"><div class="slbl">Compassionate Adult responds</div><h1 class="title-xl">Respond with care</h1><textarea id="dlg-adult-response" placeholder="Compassionate Adult: I am here with you..."></textarea><button class="btn teal full" style="margin-top:12px" onclick="nextDialogue(3)">Next</button></div></div><div class="dialogue-step"><div class="card b-gold"><div class="slbl">Repair / Reconnection</div><h1 class="title-xl">What can I offer you today?</h1><textarea id="dlg-offer" placeholder="Today I can offer you..."></textarea><div style="margin-top:12px"><div class="slbl">After Connection</div><div class="slider" onclick="setDialogueSlider(event,'after')"><div class="slider-fill" id="dlg-after-fill" style="width:${dialogue.after*10}%"></div><div class="slider-num" id="dlg-after-num">${dialogue.after}</div></div></div><button class="btn teal full" style="margin-top:12px" onclick="saveDialogue()">Save Full Dialogue</button></div></div></div>`}
+function setDialogueSlider(e,which){let box=e.currentTarget,r=box.getBoundingClientRect(),pct=Math.max(0,Math.min(100,((e.clientX-r.left)/r.width)*100)),val=Math.round(pct/10);dialogue[which]=val;document.getElementById('dlg-'+which+'-fill').style.width=pct+'%';document.getElementById('dlg-'+which+'-num').textContent=val}
+function nextDialogue(i){document.querySelectorAll('.dialogue-step').forEach((s,idx)=>s.classList.toggle('on',idx===i));document.querySelectorAll('.step-dot').forEach((d,idx)=>d.classList.toggle('on',idx===i))}
+function saveDialogue(){
+  dialogue.childFeeling=document.getElementById('dlg-child-feeling').value.trim();dialogue.childNeed=document.getElementById('dlg-child-need').value.trim();dialogue.adultResponse=document.getElementById('dlg-adult-response').value.trim();dialogue.offer=document.getElementById('dlg-offer').value.trim();
+  let note=`Before connection: ${dialogue.before}/10\nInner Child feeling: ${dialogue.childFeeling}\nInner Child need: ${dialogue.childNeed}\nCompassionate Adult response: ${dialogue.adultResponse}\nOffer today: ${dialogue.offer}\nAfter connection: ${dialogue.after}/10`;
+  state.conn=dialogue.after; state.checkins.push({date:new Date().toLocaleString(),connection:dialogue.after,feeling:'Inner Child Dialogue',note});
+  state.history.unshift({type:'Inner Child / Compassionate Adult Dialogue',date:new Date().toLocaleString(),connection:dialogue.after,feeling:'Inner Child Dialogue',note});
+  state.completed['live-dialogue']=true; state.xp+=20; confetti(); save(); closeLesson(); go('s-home'); setN('n-home');
+}
+function renderHistory(){
+  let box=document.getElementById('history-list'); if(!box)return;
+  let q=(document.getElementById('history-search')?.value||'').toLowerCase();
+  let arr=(state.history||[]).filter(h=>JSON.stringify(h).toLowerCase().includes(q));
+  box.innerHTML=arr.length?arr.map(h=>`<div class="history-item"><h4>${h.type} · ${h.date}</h4><p>Feeling: ${h.feeling} · Connection: ${h.connection}/10</p>${h.note?`<p>${String(h.note).replace(/\n/g,'<br>')}</p>`:''}</div>`).join(''):'No saved entries yet.';
+}
+function exportHistory(){let blob=new Blob([JSON.stringify(state.history||[],null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='inner-journey-archive.json';a.click()}
+function clearHistoryConfirm(){if(confirm('Clear saved Inner Journey Archive on this browser?')){state.history=[];state.checkins=[];save();}}
+function enableNotifications(){
+  if(!('Notification' in window)){document.getElementById('notify-status').textContent='Notifications are not supported in this browser.';return}
+  Notification.requestPermission().then(p=>{state.reminders.enabled=(p==='granted');save();document.getElementById('notify-status').textContent=p==='granted'?'Notifications enabled. Keep this page open for scheduled reminders.':'Notification permission was not granted.';if(p==='granted') new Notification('Pause. Breathe. Return to yourself.');})
+}
+function saveReminderSettings(){
+  state.reminders.morning=document.getElementById('rem-morning').value||'09:00';state.reminders.midday=document.getElementById('rem-midday').value||'13:00';state.reminders.evening=document.getElementById('rem-evening').value||'20:30';save();alert('Reminder settings saved.');
+}
+function loadReminderSettings(){
+  ['morning','midday','evening'].forEach(k=>{let el=document.getElementById('rem-'+k); if(el)el.value=state.reminders[k]||el.value});
+  let st=document.getElementById('notify-status'); if(st)st.textContent=state.reminders.enabled?'Notifications enabled.':'Notification permission not requested yet.';
+}
+function reminderTick(){
+  if(!state.reminders?.enabled||!('Notification' in window)||Notification.permission!=='granted')return;
+  let now=new Date(), hh=String(now.getHours()).padStart(2,'0'), mm=String(now.getMinutes()).padStart(2,'0'), t=hh+':'+mm, day=now.toDateString();
+  let msgs={morning:'How do you want to care for yourself today?',midday:'Pause. Breathe. Return.',evening:'What does your inner world need tonight?'};
+  ['morning','midday','evening'].forEach(k=>{if(state.reminders[k]===t && state.reminders.sent[k]!==day){new Notification(msgs[k]);state.reminders.sent[k]=day;save();}})
+}
+setInterval(reminderTick,30000);
+function save(){localStorage.setItem(LS,JSON.stringify(state));renderDash();renderHistory();renderPills();loadReminderSettings();}
+
+if(synth){synth.getVoices();synth.onvoiceschanged=()=>synth.getVoices()}renderFeelings();renderDash();renderHistory();renderPills();initOnboard();
+</script>
+</body>
+</html>
